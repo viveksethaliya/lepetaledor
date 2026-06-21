@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs | Areena Sheikh</title>
+    <!-- Google Fonts for elegant typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ── FAQ Premium Styles ── */
+        .page-header {
+            padding: 12rem 2rem 4rem;
+            text-align: center;
+        }
+        .page-header h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 400;
+            color: var(--text-color);
+        }
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 2rem 8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .faq-item {
+            border-bottom: 1px solid rgba(62, 39, 35, 0.1);
+        }
+        .faq-item:first-child {
+            border-top: 1px solid rgba(62, 39, 35, 0.1);
+        }
+        .faq-item details {
+            padding: 0;
+        }
+        .faq-item details summary {
+            list-style: none;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--text-color);
+            padding: 1.8rem 3rem 1.8rem 0;
+            cursor: pointer;
+            position: relative;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .faq-item details summary::-webkit-details-marker { display: none; }
+        .faq-item details summary::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+        .faq-item details[open] summary::after {
+            transform: translateY(-50%) rotate(45deg);
+        }
+        .faq-item details[open] summary {
+            color: var(--accent-color);
+        }
+        .faq-answer {
+            padding: 0 0 2rem;
+        }
+        .faq-answer p {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            line-height: 1.9;
+            color: rgba(62, 39, 35, 0.8);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar" id="announcementBar">
+        <p>Before you explore, thank you for being here and supporting this journey. Bookings for 2026 are now open.</p>
+        <button class="close-announcement" aria-label="Close announcement">&times;</button>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar solid">
+        <div class="nav-brand">
+            <a href="index.html" style="text-decoration:none;">
+                <div class="brand-logo">Le Pétale d'Or</div>
+            </a>
+        </div>
+        <div class="nav-actions">
+            <button class="menu-btn" aria-label="Open Menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <button class="close-btn" aria-label="Close Menu">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="section-num">01</span>
+                    <h2>Pressed For You</h2>
+                </div>
+                <ul class="section-links">
+                    <li><a href="wedding-bouquet-preservation.html">WEDDING BOUQUET PRESERVATION</a></li>
+                    <li><a href="shop.html">SHOP</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="section-num">02</span>
+                    <h2>Press Your Own</h2>
+                </div>
+                <ul class="section-links">
+                    <li><a href="workshops.html">WORKSHOPS</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="section-num">03</span>
+                    <h2>About</h2>
+                </div>
+                <ul class="section-links">
+                    <li><a href="about.html">THE ARTIST</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="section-num">04</span>
+                    <h2>Contact</h2>
+                </div>
+                <ul class="section-links">
+                    <li><a href="contact.html">ENQUIRE</a></li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Page Content -->
+    <main class="page-content">
+        <header class="page-header">
+            <h1>FAQs</h1>
+        </header>
+
+        <section class="faq-container">
+            <div class="faq-item">
+                <details>
+                    <summary>Where are you located?</summary>
+                    <div class="faq-answer">
+                        <p>I am located in Zurich, Ontario - a tiny town in Huron County, north of Grand Bend. In person
+                            drop off and pick up will take place in Zurich, but we also accept shipments from all over
+                            Canada.</p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="faq-item">
+                <details>
+                    <summary>How far in advance should I book?</summary>
+                    <div class="faq-answer">
+                        <p>The sooner, the better! I am only able to accept a limited number of bouquets per weekend.
+                            Once you have chosen your wedding date and booked your venue, I encourage you to book your
+                            bouquet preservation to ensure that I am able to take on the project! I am currently
+                            accepting bookings for 2025 and 2026 weddings.</p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="faq-item">
+                <details>
+                    <summary>Can I ship my bouquet?</summary>
+                    <div class="faq-answer">
+                        <p>Yes, of course! I accept bouquets from all across Canada. Upon booking, if you plan to ship
+                            your bouquet, you will receive very detailed, step-by-step shipping instructions to ensure
+                            that your bouquet arrives in pristine condition.</p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="faq-item">
+                <details>
+                    <summary>How soon do you require my bouquet?</summary>
+                    <div class="faq-answer">
+                        <p>I require all bouquets to be delivered to my location, in Zurich, Ontario, within 2 days of
+                            the occasion, or 3 if shipping! If you are shipping your bouquet, it would be shipped out on
+                            the first business day following the occasion. It is important to receive and press the
+                            bouquet in the freshest possible form to retain as much color as possible. The fresher the
+                            bouquet, the better the results!</p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="faq-item">
+                <details>
+                    <summary>Will you require my whole bouquet?</summary>
+                    <div class="faq-answer">
+                        <p>Yes, the full bouquet is required. In some cases, depending on the frame size or the quantity
+                            of add-on frames, additional flowers may be required such as bridesmaids bouquets or
+                            centerpieces, etc. I carefully dissect the arrangements and press the blooms that are in the
+                            best condition. In the event that some of the flowers are bruising or wilting, it's nice to
+                            have the extra blooms to choose from to eliminate those imperfections in the final piece.
+                        </p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="faq-item">
+                <details>
+                    <summary>Do you require a deposit to reserve my date?</summary>
+                    <div class="faq-answer">
+                        <p>Yes, a deposit is required. In order to lock in your spot, a non refundable deposit of $100
+                            is required, in addition to a contract. If you would like to inquire on the availability for
+                            your wedding date, please fill out the form on the Contact Me page!</p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="faq-item">
+                <details>
+                    <summary>What is the expected turnaround time?</summary>
+                    <div class="faq-answer">
+                        <p>Between taking apart the bouquet, pressing, reconstructing flowers and designing the final
+                            piece, there are well over 20+ hours spent on your bouquet. During peak wedding season,
+                            please anticipate a turnaround time of 24 weeks.</p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="faq-item">
+                <details>
+                    <summary>Which frame is most popular? Which would you recommend?</summary>
+                    <div class="faq-answer">
+                        <p>The floating glass frames are definitely the most sought after option. I currently offer this
+                            style of frame in three sizes; 16x20 (small), 18x24 (medium), and 22x28 (large). The size of
+                            the frame itself should reflect the size of your bouquet in terms of small, medium, or
+                            large. If you're looking for a true statement piece of art to display in your home, the
+                            22x28 is incredible but also requires a substantial amount of flowers.</p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="faq-item">
+                <details>
+                    <summary>Which flowers press best? Are there any flowers you cannot press?</summary>
+                    <div class="faq-answer">
+                        <p>Some of my personal favourite flowers to press are dahlias, anemones, peonies, delphinium,
+                            ranunculus, and zinnias! Conveniently, these flowers are also offered in such a stunning
+                            variety of colours, and retain bold colours in the preservation process. Be sure to
+                            incorporate variety in your fresh bouquet for more dimension and depth in the preserved
+                            piece.</p>
+                        <p style="margin-top: 1rem;">I've yet to come across a flower that I wasn't able to press.
+                            Depending on your frame style however, some flowers or dried components may not be able to
+                            be included. Floating glass frames require the flowers to be pressed paper thin, whereas
+                            standard frames have much more flex in the backing which allows for much more depth and
+                            dimension.</p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="faq-item">
+                <details>
+                    <summary>Can I purchase a gift certificate?</summary>
+                    <div class="faq-answer">
+                        <p>Yes, you can! Gift certificates are available in any amount you desire. Whether you're
+                            gifting a pressed bouquet to a bride for her bridal shower or the big day, I've got you
+                            covered.</p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="faq-item">
+                <details>
+                    <summary>Do you offer any add-on frames?</summary>
+                    <div class="faq-answer">
+                        <p>I do have an add-on 8" x 10" floating glass and standard frame available for my clients. This
+                            size frame is the perfect gift for your bridesmaids, maid of honour, mother in law, or
+                            mother of the bride! This size frame is not offered individually, and must accompany a main
+                            frame of 16x20 or larger.</p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="faq-item">
+                <details>
+                    <summary>Do you offer colour enhancing?</summary>
+                    <div class="faq-answer">
+                        <p>My approach to my pressed flower art is entirely natural, this means that no chemicals,
+                            paints, or enhancements are utilized. Pressing flowers essentially requires a living flower
+                            to be squished until all moisture content has been removed. In doing so, removing the water
+                            content and dehydrating the flower causes colour discolouration, and will continue to fade
+                            and become more vintage in tone over the years. Having said that, I am well versed with
+                            colour correction, and in the event that there is a specific flower that was very prominent
+                            in the fresh bouquet but lost all colour in the press, I would enhance if needed. This is an
+                            incredibly rare occurrence, and the client would be contacted for approval first.</p>
+                    </div>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-col">
+                    <h3>More Info</h3>
+                    <ul>
+                        <li><a href="process.html">Process</a></li>
+                        <li><a href="memorial-flowers.html">Memorial Flowers</a></li>
+            <li><a href="wedding-bouquet-preservation.html">Wedding Bouquet</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Need Help?</h3>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul class="contact-links">
+                        <li><a href="https://instagram.com" target="_blank">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                            Instagram
+                        </a></li>
+                        <li><a href="mailto:lepetaledor01@gmail.com">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            lepetaledor01@gmail.com
+                        </a></li>
+                        <li><a href="tel:+918849553370">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            +91 8849553370
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-right">
+                <p class="warning-text">Flowers and foliage are subject to seasonal and market availability.
+                    Substitutions may be made when required while preserving the overall style and quality of the
+                    arrangement.</p>
+                <p class="copyright">&copy; 2026 Copyright Le Pétale d'Or. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

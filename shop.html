@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | Areena Sheikh</title>
+    <!-- Google Fonts for elegant typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="premium-service.css">
+    <style>
+        /* Shop Specific Styles */
+        .shop-hero {
+            padding: 12rem 2rem 6rem;
+            text-align: center;
+            background: var(--bg-color);
+        }
+        .shop-hero .subtitle {
+            font-family: var(--font-sans);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        .shop-hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        .shop-hero p {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 1.5rem auto;
+            color: rgba(62, 39, 35, 0.8);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem 8rem 2rem;
+        }
+
+        .product-card {
+            background: #fff;
+            border: 1px solid rgba(62, 39, 35, 0.08);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(62, 39, 35, 0.08);
+        }
+
+        .product-image {
+            width: 100%;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(62, 39, 35, 0.05);
+        }
+
+        .product-info {
+            padding: 2.5rem 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .add-to-cart-btn {
+            margin-top: auto;
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--text-color);
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        /* Floating Cart Icon */
+        .floating-cart {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(62, 39, 35, 0.1);
+            z-index: 100;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            color: var(--text-color);
+        }
+        
+        .floating-cart:hover {
+            transform: scale(1.05);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--accent-color);
+            color: #fff;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            font-family: var(--font-sans);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Cart Notification */
+        .cart-notification {
+            position: fixed;
+            bottom: 30px;
+            right: -400px;
+            background: var(--text-color);
+            color: var(--bg-color);
+            padding: 1.5rem 2.5rem;
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cart-notification.show {
+            right: 30px;
+        }
+
+        /* Sidebar Cart Styles */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 400px;
+            max-width: 100%;
+            height: 100vh;
+            background: var(--bg-color);
+            box-shadow: -5px 0 30px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .cart-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cart-header h2 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--text-color);
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-color);
+            line-height: 1;
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(62, 39, 35, 0.05);
+        }
+
+        .cart-item-info h4 {
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            color: var(--text-color);
+            margin-bottom: 0.4rem;
+        }
+
+        .cart-item-info p {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            margin-bottom: 0.6rem;
+        }
+
+        .cart-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .qty-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            width: 28px;
+            height: 28px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            border-radius: 50%;
+            color: var(--text-color);
+            transition: background 0.3s ease;
+        }
+
+        .qty-btn:hover {
+            background: rgba(62, 39, 35, 0.05);
+        }
+
+        .remove-btn {
+            background: transparent;
+            border: none;
+            color: #c0392b;
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .cart-footer {
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            background: #fff;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 1.2rem;
+            background: #25D366; /* WhatsApp Green */
+            color: #fff;
+            border: none;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .btn-checkout:hover {
+            background: #128C7E;
+        }
+
+        .btn-checkout svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* CTA Section */
+        .cta-personal {
+            background: var(--text-color);
+            color: var(--bg-color);
+            text-align: center;
+            padding: 8rem 2rem;
+        }
+
+        .cta-personal h2 {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .cta-personal p {
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 1.5rem auto;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Announcement Bar -->
+    <div class="announcement-bar" id="announcementBar">
+        <p>Before you explore, thank you for being here and supporting this journey. Bookings for 2026 are now open.</p>
+        <button class="close-announcement" aria-label="Close announcement">&times;</button>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar solid">
+        <div class="nav-brand">
+            <a href="index.html" style="text-decoration:none;">
+                <div class="brand-logo">Le Pétale d'Or</div>
+            </a>
+        </div>
+        <div class="nav-actions">
+            <button class="menu-btn" aria-label="Open Menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Sidebar Overlay & Sidebar -->
+    <div class="sidebar-overlay"></div>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <button class="close-btn" aria-label="Close Menu">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+                    stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="section-num">01</span>
+                    <h2>Pressed For You</h2>
+                </div>
+                <ul class="section-links">
+                    <li><a href="wedding-bouquet-preservation.html">WEDDING BOUQUET PRESERVATION</a></li>
+                    <li><a href="shop.html">SHOP</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="section-num">02</span>
+                    <h2>Press Your Own</h2>
+                </div>
+                <ul class="section-links">
+                    <li><a href="workshops.html">WORKSHOPS</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="section-num">03</span>
+                    <h2>About</h2>
+                </div>
+                <ul class="section-links">
+                    <li><a href="about.html">THE ARTIST</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="section-num">04</span>
+                    <h2>Contact</h2>
+                </div>
+                <ul class="section-links">
+                    <li><a href="contact.html">ENQUIRE</a></li>
+                </ul>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Floating Cart Icon -->
+    <div class="floating-cart fade-in-up delay-2" onclick="openCart()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        <span class="cart-count" id="cartCount">0</span>
+    </div>
+
+    <!-- Shop Cart Sidebar & Overlay -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="cart-close" onclick="closeCart()">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p style="text-align:center; font-family:var(--font-sans); color:rgba(62,39,35,0.5); margin-top:2rem;">Your cart is empty.</p>
+        </div>
+        <div class="cart-footer">
+
+            <button class="btn-checkout" onclick="checkoutWhatsapp()">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                Inquire on WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <main>
+        <!-- Intro Hero -->
+        <header class="shop-hero">
+            <span class="subtitle fade-in-up">A Quiet Collection</span>
+            <h1 class="fade-in-up delay-1">Pieces to bring flowers into your everyday.</h1>
+            <p class="fade-in-up delay-2">Some are made slowly by hand in my studio. Others are here to guide you in creating your own.</p>
+            <p class="fade-in-up delay-3">Whether you are starting your flower pressing journey or wanting to keep a small piece of it close, you’re welcome to take your time.</p>
+        </header>
+
+        <!-- Product Grid -->
+        <section class="product-grid">
+            <!-- Product 2 -->
+            <div class="product-card fade-in-up delay-1">
+                <img src="Images/shop/Ivory-Blossom-Preservation-Frame.jpeg" alt="Ivory Blossom Preservation Frame" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Ivory Blossom Preservation Frame</h3>
+                    <button class="add-to-cart-btn" onclick="addToCart('Ivory Blossom Preservation Frame', this)">Add to Cart</button>
+                </div>
+            </div>
+            <!-- Product 4 -->
+            <div class="product-card fade-in-up">
+                <img src="Images/shop/Blush-Meadow-Frame.jpeg" alt="Blush Meadow Frame" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Blush Meadow Frame</h3>
+                    <button class="add-to-cart-btn" onclick="addToCart('Blush Meadow Frame', this)">Add to Cart</button>
+                </div>
+            </div>
+            <!-- Product 5 -->
+            <div class="product-card fade-in-up delay-1">
+                <img src="Images/shop/Botanical-Bloom-Floating-Frame.jpeg" alt="Botanical Bloom Floating Frame" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Botanical Bloom Floating Frame</h3>
+                    <button class="add-to-cart-btn" onclick="addToCart('Botanical Bloom Floating Frame', this)">Add to Cart</button>
+                </div>
+            </div>
+            <!-- Product 6 -->
+            <div class="product-card fade-in-up delay-2">
+                <img src="Images/shop/Ivory-Meadow-Frame.jpeg" alt="Ivory Meadow Frame" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-title">Ivory Meadow Frame</h3>
+                    <button class="add-to-cart-btn" onclick="addToCart('Ivory Meadow Frame', this)">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Custom Piece CTA -->
+        <section class="cta-personal">
+            <div class="fade-in-up">
+                <span class="subtitle" style="font-family: var(--font-sans); letter-spacing: 0.15em; text-transform: uppercase; font-size: 0.85rem; color: var(--accent-color); margin-bottom: 1.5rem; display: block;">Looking for something more personal?</span>
+                <h2>If you'd love a piece made just for you.</h2>
+                <p>From your wedding bouquet, a special occasion, or flowers that mean something.</p>
+                <p>I'd love to hear about it.</p>
+                <p style="margin-bottom: 3rem;">Every custom piece starts with a conversation.</p>
+                <a href="contact.html" class="premium-btn" style="background: transparent; color: var(--bg-color); border: 1px solid var(--bg-color);">Enquire about a custom piece</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-col">
+                    <h3>More Info</h3>
+                    <ul>
+                        <li><a href="process.html">Process</a></li>
+                        <li><a href="memorial-flowers.html">Memorial Flowers</a></li>
+                        <li><a href="wedding-bouquet-preservation.html">Wedding Bouquet</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Need Help?</h3>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <ul class="contact-links">
+                        <li><a href="https://instagram.com" target="_blank">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                            Instagram
+                        </a></li>
+                        <li><a href="mailto:lepetaledor01@gmail.com">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            lepetaledor01@gmail.com
+                        </a></li>
+                        <li><a href="tel:+918849553370">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            +91 8849553370
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-right">
+                <p class="warning-text">Flowers and foliage are subject to seasonal and market availability.
+                    Substitutions may be made when required while preserving the overall style and quality of the
+                    arrangement.</p>
+                <p class="copyright">&copy; 2026 Copyright Le Pétale d'Or. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Notification -->
+    <div class="cart-notification" id="cartNotification">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        <span id="cartNotificationText">Item added!</span>
+    </div>
+
+    <!-- Shop Logic & Base Script -->
+    <script>
+        // Cart State
+        let cart = [];
+
+        // Functions
+        function addToCart(name, btn) {
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ name, quantity: 1 });
+            }
+            updateCartUI();
+
+            // Toast Notification
+            const notification = document.getElementById('cartNotification');
+            const notificationText = document.getElementById('cartNotificationText');
+            notificationText.innerText = name + ' added!';
+            
+            notification.classList.add('show');
+            
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+
+            // Button Feedback Animation
+            if (btn) {
+                const originalText = btn.innerHTML;
+                btn.innerHTML = 'Added ✓';
+                btn.style.background = 'var(--text-color)';
+                btn.style.color = 'var(--bg-color)';
+                btn.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                    btn.style.color = '';
+                    btn.style.transform = '';
+                }, 1500);
+            }
+        }
+
+        function updateQuantity(index, delta) {
+            cart[index].quantity += delta;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartCountElement = document.getElementById('cartCount');
+
+            cartItemsContainer.innerHTML = '';
+            let count = 0;
+
+            cart.forEach((item, index) => {
+                count += item.quantity;
+
+                const itemEl = document.createElement('div');
+                itemEl.className = 'cart-item';
+                itemEl.innerHTML = `
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+                    </div>
+                    <div class="cart-controls">
+                        <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                        <span style="font-family: var(--font-sans); font-size: 0.9rem;">${item.quantity}</span>
+                        <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(itemEl);
+            });
+
+            cartCountElement.innerText = count;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align:center; font-family:var(--font-sans); color:rgba(62,39,35,0.5); margin-top:2rem;">Your cart is empty.</p>';
+            }
+
+            // Pulse animation on icon
+            const cartIcon = document.querySelector('.floating-cart');
+            cartIcon.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                cartIcon.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        function openCart() {
+            document.getElementById('cartSidebar').classList.add('open');
+            document.getElementById('cartOverlay').classList.add('show');
+        }
+
+        function closeCart() {
+            document.getElementById('cartSidebar').classList.remove('open');
+            document.getElementById('cartOverlay').classList.remove('show');
+        }
+
+        function checkoutWhatsapp() {
+            if (cart.length === 0) {
+                alert("Your cart is empty.");
+                return;
+            }
+            
+            let text = "Hello! I would like to inquire about the following items:%0A%0A";
+            
+            cart.forEach(item => {
+                text += `- ${item.name} (x${item.quantity})%0A`;
+            });
+            
+            const phoneNumber = "918849553370";
+            const url = `https://wa.me/${phoneNumber}?text=${text}`;
+            
+            window.open(url, '_blank');
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
