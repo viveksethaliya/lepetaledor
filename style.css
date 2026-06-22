@@ -118,11 +118,30 @@ body {
     /* font-family: "Tangerine", cursive; */
     font-family: "Italianno", cursive;
     /* font-style: italic; */
-    font-weight: 400;             /* Normal weight preserves the delicate thin lines */    /* Forces the text to stay lowercase */
+    font-weight: 400;             /* Normal weight preserves the delicate thin lines */
     letter-spacing: 0.04em;       /* Adds the elegant, airy spacing between letters */
     color: var(--text-color);
     font-size: 3rem;
+    line-height: 1;
 }
+
+.brand-subtitle {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-color);
+    text-align: center;
+    margin-top: -0.2rem;
+    opacity: 0.8;
+}
+
+.nav-brand a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 
 .nav-actions {
     display: flex;
@@ -1702,7 +1721,11 @@ body {
     }
     
     .brand-logo {
-        font-size: 2.5rem;
+        font-size: 2rem;
+    }
+    
+    .brand-subtitle {
+        font-size: 0.55rem;
     }
     
     /* Hero Placeholder Adjustments */
