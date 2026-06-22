@@ -1615,3 +1615,149 @@ body {
         gap: 2.5rem;
     }
 }
+
+/* --- Extra Mobile Adjustments (< 768px and < 576px) --- */
+@media (max-width: 768px) {
+    /* Reduce global paddings */
+    .offerings {
+        padding: 4rem 1.5rem;
+        gap: 4rem;
+    }
+    
+    .about-artist-section {
+        padding: 4rem 1.5rem;
+    }
+    
+    .about-container {
+        gap: 3rem;
+    }
+    
+    .cta-section {
+        padding: 4rem 1.5rem;
+    }
+    
+    .cta-container {
+        gap: 3rem;
+    }
+    
+    .vip-section {
+        padding: 4rem 1.5rem;
+    }
+    
+    .vip-title {
+        font-size: 2.2rem;
+    }
+    
+    .testimonials-section {
+        padding: 4rem 1.5rem 3rem 1.5rem;
+    }
+    
+    .testi-text {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Process Timeline Adjustments */
+    .process-timeline {
+        margin-top: 2rem;
+        gap: 2.5rem;
+    }
+    
+    .step-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .process-step {
+        padding-left: 2rem;
+    }
+    
+    /* Footer stacking */
+    .footer-left {
+        gap: 2rem;
+        flex-direction: column;
+    }
+    
+    /* Ensure no text overflows */
+    .about-title {
+        font-size: 3rem;
+    }
+    
+    .hero-tagline-headline {
+        font-size: 2.5rem;
+    }
+    
+    /* Adjust contact forms slightly */
+    .contact-form {
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar {
+        padding: 1rem 1rem;
+    }
+    
+    .navbar.scrolled {
+        padding: 0.8rem 1rem;
+    }
+    
+    .brand-logo {
+        font-size: 2.5rem;
+    }
+    
+    /* Hero Placeholder Adjustments */
+    .placeholder-img h2 {
+        font-size: 2.2rem;
+    }
+    
+    .placeholder-img p {
+        font-size: 0.75rem;
+    }
+    
+    /* Reduce margins/gaps further */
+    .offering-title {
+        font-size: 2rem;
+    }
+    
+    .offering-block, .offering-block.reverse {
+        gap: 2rem;
+    }
+    
+    .about-title {
+        font-size: 2.5rem;
+    }
+    
+    .cta-title {
+        font-size: 2rem;
+    }
+    
+    .btn-primary, .btn-secondary, .btn-vip {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.75rem;
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* Sidebar mobile widths */
+    .sidebar {
+        width: 100%;
+    }
+    
+    .sidebar-header {
+        padding: 1.5rem;
+    }
+    
+    .nav-section {
+        padding: 1.5rem;
+    }
+    
+    .section-title h2 {
+        font-size: 1.8rem;
+    }
+    
+    /* Announcement text scrolling/fitting */
+    .announcement-bar p {
+        font-size: 0.75rem;
+        padding: 0 30px;
+    }
+}
